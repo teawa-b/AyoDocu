@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AyoDocu | Style-Locked Timeline</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="hero">
+        <div class="hero__content">
+          <p class="eyebrow">Style-Locked Timeline Pipeline</p>
+          <h1>AyoDocu Review Console</h1>
+          <p class="subtitle">
+            Pipeline-first production for deterministic, style-locked documentary timelines.
+          </p>
+          <div class="hero__actions">
+            <button class="primary" type="button">Approve all → Render video</button>
+            <button class="ghost" type="button">Request revisions</button>
+          </div>
+        </div>
+        <div class="hero__summary">
+          <div class="summary-card">
+            <h2>Project brief</h2>
+            <ul>
+              <li><strong>Topic:</strong> Solitary confinement &amp; the mind</li>
+              <li><strong>Runtime:</strong> 10–12 minutes</li>
+              <li><strong>Tone:</strong> Clinical, eerie, cinematic</li>
+              <li><strong>Style bible:</strong> Reference image + mannequin character lock</li>
+            </ul>
+          </div>
+          <div class="summary-card">
+            <h2>Style lock</h2>
+            <p>
+              Every prompt is prepended with the same character bible, lighting rules, and
+              negative filters to guarantee visual consistency.
+            </p>
+            <div class="tags">
+              <span>Reference image conditioning</span>
+              <span>Locked seeds</span>
+              <span>Negative rules</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="pipeline">
+          <div class="section-header">
+            <h2>Pipeline status</h2>
+            <p>All steps are queued or complete. Review highlights before rendering.</p>
+          </div>
+          <div class="pipeline__grid" id="pipelineGrid"></div>
+        </section>
+
+        <section class="scenes">
+          <div class="section-header">
+            <div>
+              <h2>Scene cards</h2>
+              <p>Mobile-first review list with locked prompts and regeneration tools.</p>
+            </div>
+            <label class="toggle">
+              <input id="highlightToggle" type="checkbox" />
+              <span>Highlight hero moments</span>
+            </label>
+          </div>
+          <div class="scene-list" id="sceneList"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
