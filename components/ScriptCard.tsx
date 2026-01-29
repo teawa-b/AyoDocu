@@ -1,14 +1,5 @@
+import type { Scene } from "@/types";
 import RegenerateButton from "./RegenerateButton";
-
-interface Scene {
-  id: string;
-  time: string;
-  duration: string;
-  narration: string;
-  prompt: string;
-  imageUrl?: string;
-  status: "pending" | "generating" | "approved";
-}
 
 interface ScriptCardProps {
   scene: Scene;
@@ -28,12 +19,12 @@ export default function ScriptCard({
         {scene.imageUrl ? (
           <img
             src={scene.imageUrl}
-            alt={`Scene ${scene.id}`}
+            alt={`Scene ${scene.id}: ${scene.narrationText.substring(0, 50)}...`}
             className="w-full h-full object-cover"
           />
         ) : (
           <div className="text-center p-8">
-            <div className="text-6xl mb-4">🎬</div>
+            <div className="text-6xl mb-4" role="img" aria-label="Film clapper">🎬</div>
             <p className="text-[var(--muted)] text-sm">
               {scene.status === "generating"
                 ? "Generating image..."
@@ -42,7 +33,7 @@ export default function ScriptCard({
           </div>
         )}
         <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-sm px-3 py-1 rounded-full text-sm">
-          {scene.id} · {scene.time}
+          {scene.id} · {scene.startTime}
         </div>
         <div className="absolute top-4 right-4">
           <span
@@ -70,7 +61,7 @@ export default function ScriptCard({
           <h3 className="text-sm font-medium text-[var(--muted)] mb-2">
             Narration ({scene.duration})
           </h3>
-          <p className="text-lg leading-relaxed">{scene.narration}</p>
+          <p className="text-lg leading-relaxed">{scene.narrationText}</p>
         </div>
 
         {/* Prompt */}
@@ -80,7 +71,7 @@ export default function ScriptCard({
           </h3>
           <div className="bg-[var(--bg)] border border-[var(--border)] rounded-xl p-4">
             <p className="text-sm text-[var(--muted)] leading-relaxed">
-              {scene.prompt}
+              {scene.imagePrompt}
             </p>
           </div>
         </div>
@@ -90,16 +81,20 @@ export default function ScriptCard({
           <button
             onClick={() => onApprove(scene.id)}
             disabled={scene.status === "generating"}
+            aria-label="Approve this scene"
             className="flex-1 bg-[var(--success)] text-black font-bold py-3 px-6 rounded-full hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px] flex items-center justify-center gap-2"
           >
-            <span>✓</span> Approve Scene
+            <span role="img" aria-label="Checkmark">✓</span> Approve Scene
           </button>
           <RegenerateButton
             onClick={() => onRegenerate(scene.id)}
             loading={scene.status === "generating"}
           />
-          <button className="flex-1 bg-[var(--surface-alt)] border border-[var(--border)] py-3 px-6 rounded-full hover:bg-[var(--surface)] transition-all min-h-[44px] flex items-center justify-center gap-2">
-            <span>✏️</span> Edit
+          <button 
+            aria-label="Edit scene"
+            className="flex-1 bg-[var(--surface-alt)] border border-[var(--border)] py-3 px-6 rounded-full hover:bg-[var(--surface)] transition-all min-h-[44px] flex items-center justify-center gap-2"
+          >
+            <span role="img" aria-label="Pencil">✏️</span> Edit
           </button>
         </div>
       </div>

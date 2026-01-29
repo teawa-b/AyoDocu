@@ -40,7 +40,7 @@ The app workflow:
 
 ### Prerequisites
 
-- Node.js 18+ installed
+- Node.js 20.9.0+ installed
 - npm or yarn package manager
 
 ### Installation

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "../styles/globals.css";
+import NavigationBar from "@/components/NavigationBar";
 
 export const metadata: Metadata = {
   title: "AyoDocu - AI Documentary Generator",
@@ -13,7 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="pb-20">
+        {children}
+        <NavigationBar />
+      </body>
     </html>
   );
 }

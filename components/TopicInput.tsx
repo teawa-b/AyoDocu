@@ -6,17 +6,28 @@ import { useRouter } from "next/navigation";
 export default function TopicInput() {
   const [topic, setTopic] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const router = useRouter();
 
   const handleGenerateScript = async () => {
-    if (!topic.trim()) return;
+    if (!topic.trim()) {
+      setError("Please enter a topic");
+      return;
+    }
     
     setLoading(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setError("");
     
-    // Navigate to script page
-    router.push("/script");
+    try {
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      
+      // Navigate to script page
+      router.push("/script");
+    } catch (err) {
+      setError("Failed to generate script. Please try again.");
+      setLoading(false);
+    }
   };
 
   return (
@@ -45,10 +56,21 @@ export default function TopicInput() {
           <textarea
             id="topic"
             value={topic}
-            onChange={(e) => setTopic(e.target.value)}
+            onChange={(e) => {
+              setTopic(e.target.value);
+              setError("");
+            }}
             placeholder="e.g., The psychological effects of solitary confinement on the human mind..."
+            aria-required="true"
+            aria-invalid={!!error}
+            aria-describedby={error ? "topic-error" : undefined}
             className="w-full h-40 bg-[var(--bg)] border border-[var(--border)] rounded-2xl p-4 text-white resize-none focus:outline-none focus:ring-2 focus:ring-[var(--accent)] transition-all"
           />
+          {error && (
+            <p id="topic-error" className="text-red-400 text-sm mt-2">
+              {error}
+            </p>
+          )}
 
           <button
             onClick={handleGenerateScript}

@@ -1,43 +1,7 @@
 // Placeholder API functions for AyoDocu
 // These will be connected to real APIs (OpenAI, Replicate, ElevenLabs, Runway) later
 
-// Types
-export interface Script {
-  topic: string;
-  thesis: string;
-  tone: string;
-  runtimeTarget: string;
-  scenes: Scene[];
-}
-
-export interface Scene {
-  id: string;
-  startTime: string;
-  duration: string;
-  narrationText: string;
-  imagePrompt: string;
-  imageSeed?: number;
-  imageUrl?: string;
-  motionType?: "kenburns" | "ai_video";
-  status: "pending" | "generating" | "approved";
-}
-
-export interface ImageResult {
-  url: string;
-  seed: number;
-  prompt: string;
-}
-
-export interface VideoResult {
-  url: string;
-  duration: number;
-}
-
-export interface AudioResult {
-  url: string;
-  duration: number;
-  text: string;
-}
+import type { Script, Scene, ImageResult, VideoResult, AudioResult } from "@/types";
 
 /**
  * Generate a documentary script from a topic description
@@ -47,8 +11,6 @@ export interface AudioResult {
 export async function generateScript(topic: string): Promise<Script> {
   // TODO: Connect to OpenAI API for script generation
   // This would use GPT-4 to create an outline, narration, and scene breakdown
-  
-  console.log("Generating script for topic:", topic);
   
   // Simulate API delay
   await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -84,14 +46,11 @@ export async function generateImage(
   // TODO: Connect to Replicate API (e.g., SDXL or Stable Diffusion)
   // Use reference image conditioning and locked character descriptions
   
-  console.log("Generating image with prompt:", prompt);
-  console.log("Style reference:", styleReference);
-  
   // Simulate API delay
   await new Promise((resolve) => setTimeout(resolve, 3000));
   
   return {
-    url: "/placeholder-image.jpg",
+    url: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%231a2236' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%23a6afc2' font-family='sans-serif' font-size='20'%3EGenerated Image%3C/text%3E%3C/svg%3E",
     seed: Math.floor(Math.random() * 1000000),
     prompt,
   };
@@ -110,14 +69,11 @@ export async function animateImage(
   // TODO: Connect to Runway API for AI video generation
   // For Ken Burns, could use FFmpeg directly
   
-  console.log("Animating image:", imageUrl);
-  console.log("Motion type:", motionType);
-  
   // Simulate API delay
   await new Promise((resolve) => setTimeout(resolve, 5000));
   
   return {
-    url: "/placeholder-video.mp4",
+    url: "#", // Placeholder - will be replaced with actual video URL
     duration: 6,
   };
 }
@@ -134,14 +90,11 @@ export async function generateVoiceover(
 ): Promise<AudioResult> {
   // TODO: Connect to ElevenLabs API for text-to-speech
   
-  console.log("Generating voiceover for text:", text);
-  console.log("Voice ID:", voiceId);
-  
   // Simulate API delay
   await new Promise((resolve) => setTimeout(resolve, 2000));
   
   return {
-    url: "/placeholder-audio.mp3",
+    url: "#", // Placeholder - will be replaced with actual audio URL
     duration: 6,
     text,
   };
@@ -156,10 +109,8 @@ export async function assembleVideo(scenes: Scene[]): Promise<string> {
   // TODO: Use FFmpeg or video assembly service
   // Stitch clips, add voiceover, add subtitles
   
-  console.log("Assembling video from scenes:", scenes.length);
-  
   // Simulate API delay
   await new Promise((resolve) => setTimeout(resolve, 10000));
   
-  return "/final-video.mp4";
+  return "#"; // Placeholder - will be replaced with actual video URL
 }

@@ -1,46 +1,37 @@
 "use client";
 
 import { useState } from "react";
+import type { Scene } from "@/types";
 import ScriptCard from "./ScriptCard";
-
-interface Scene {
-  id: string;
-  time: string;
-  duration: string;
-  narration: string;
-  prompt: string;
-  imageUrl?: string;
-  status: "pending" | "generating" | "approved";
-}
 
 // Sample scenes for demonstration
 const sampleScenes: Scene[] = [
   {
     id: "S-01",
-    time: "00:00",
+    startTime: "00:00",
     duration: "0:06",
-    narration:
+    narrationText:
       "Solitary confinement is often described as silence. But the mind doesn't stay quiet for long.",
-    prompt:
+    imagePrompt:
       "Wide shot, mannequin lying on narrow prison bed, arms behind head, steel bars foreground blur, overhead light bloom, dust in air, cinematic framing.",
     status: "approved",
   },
   {
     id: "S-02",
-    time: "00:06",
+    startTime: "00:06",
     duration: "0:06",
-    narration:
+    narrationText:
       "With no people, no movement, no meaning, time stops behaving normally.",
-    prompt:
+    imagePrompt:
       "Close shot of mannequin staring upward, wall texture sharp, clock-like shadow pattern on concrete, strong vignette, cold color temperature.",
     status: "approved",
   },
   {
     id: "S-03",
-    time: "00:12",
+    startTime: "00:12",
     duration: "0:06",
-    narration: "Minutes stretch. Hours fold in on themselves.",
-    prompt:
+    narrationText: "Minutes stretch. Hours fold in on themselves.",
+    imagePrompt:
       "Top-down shot, mannequin seated on floor, knees up, long hard shadow cutting across cell, dramatic negative space.",
     status: "pending",
   },
@@ -139,6 +130,7 @@ export default function CardStack() {
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
+                aria-label={`Go to scene ${index + 1}`}
                 className={`h-2 rounded-full transition-all ${
                   index === currentIndex
                     ? "w-8 bg-[var(--accent)]"
