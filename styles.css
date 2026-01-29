@@ -226,6 +226,32 @@ main {
   box-shadow: 0 0 0 1px rgba(90, 209, 255, 0.5);
 }
 
+.scene-thumb {
+  position: relative;
+  border-radius: 14px;
+  min-height: 140px;
+  background: linear-gradient(160deg, rgba(90, 209, 255, 0.25), rgba(20, 24, 35, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.scene-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15), transparent 55%);
+}
+
+.scene-thumb span {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .scene-meta {
   display: flex;
   justify-content: space-between;

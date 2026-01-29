@@ -169,6 +169,12 @@ const renderScenes = () => {
       card.classList.add("hero");
     }
 
+    const thumbnail = document.createElement("div");
+    thumbnail.className = "scene-thumb";
+    const thumbLabel = document.createElement("span");
+    thumbLabel.textContent = "Style-locked frame";
+    thumbnail.appendChild(thumbLabel);
+
     const meta = document.createElement("div");
     meta.className = "scene-meta";
     meta.innerHTML = `<span>${scene.id} · ${scene.time}</span><span>${scene.duration}</span>`;
@@ -190,6 +196,7 @@ const renderScenes = () => {
       actions.appendChild(button);
     });
 
+    card.appendChild(thumbnail);
     card.appendChild(meta);
     card.appendChild(narration);
     card.appendChild(prompt);
